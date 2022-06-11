@@ -23,9 +23,16 @@
     "vite": "^2.9.9",
     "vue-tsc": "^0.34.7"
   },
-  "extends": [
-    "prettier"
-  ],
+  "husky":{
+    "hooks":{
+      "pre-commit":"lint-staged"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "prettier"
+    ]
+  },
   "lint-staged": {
     "*.{js,css,md,ts,vue}": "prettier --write"
   }
