@@ -5,10 +5,42 @@ import "@vue/runtime-core";
 
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
+    Breadcrumb: typeof import("./src/components/Breadcrumb.vue")["default"];
+    ElAside: typeof import("element-plus/es")["ElAside"];
+    ElBreadcrumb: typeof import("element-plus/es")["ElBreadcrumb"];
+    ElBreadcrumbItem: typeof import("element-plus/es")["ElBreadcrumbItem"];
     ElButton: typeof import("element-plus/es")["ElButton"];
+    ElCard: typeof import("element-plus/es")["ElCard"];
+    ElConfigProvider: typeof import("element-plus/es")["ElConfigProvider"];
+    ElContainer: typeof import("element-plus/es")["ElContainer"];
+    ElDatePicker: typeof import("element-plus/es")["ElDatePicker"];
+    ElDialog: typeof import("element-plus/es")["ElDialog"];
+    ElFooter: typeof import("element-plus/es")["ElFooter"];
     ElForm: typeof import("element-plus/es")["ElForm"];
     ElFormItem: typeof import("element-plus/es")["ElFormItem"];
+    ElHeader: typeof import("element-plus/es")["ElHeader"];
+    ElIcon: typeof import("element-plus/es")["ElIcon"];
+    ElImage: typeof import("element-plus/es")["ElImage"];
     ElInput: typeof import("element-plus/es")["ElInput"];
+    ElInputNumber: typeof import("element-plus/es")["ElInputNumber"];
+    ElMain: typeof import("element-plus/es")["ElMain"];
+    ElMenu: typeof import("element-plus/es")["ElMenu"];
+    ElMenuItem: typeof import("element-plus/es")["ElMenuItem"];
+    ElMenuItemGroup: typeof import("element-plus/es")["ElMenuItemGroup"];
+    ElPagination: typeof import("element-plus/es")["ElPagination"];
+    ElRadio: typeof import("element-plus/es")["ElRadio"];
+    ElRadioGroup: typeof import("element-plus/es")["ElRadioGroup"];
+    ElResult: typeof import("element-plus/es")["ElResult"];
+    ElSubMenu: typeof import("element-plus/es")["ElSubMenu"];
+    ElTable: typeof import("element-plus/es")["ElTable"];
+    ElTableColumn: typeof import("element-plus/es")["ElTableColumn"];
+    Footer: typeof import("./src/components/Footer.vue")["default"];
+    Header: typeof import("./src/components/Header.vue")["default"];
+    InfoLists: typeof import("./src/components/students/InfoLists.vue")["default"];
+    Layout: typeof import("./src/components/Layout.vue")["default"];
+    Loading: typeof import("element-plus/es")["ElLoadingDirective"];
+    Menu: typeof import("./src/components/Menu.vue")["default"];
+    Pagination: typeof import("./src/components/Pagination.vue")["default"];
     RouterLink: typeof import("vue-router")["RouterLink"];
     RouterView: typeof import("vue-router")["RouterView"];
   }

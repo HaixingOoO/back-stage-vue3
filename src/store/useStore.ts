@@ -1,14 +1,15 @@
 import { defineStore } from "pinia";
+import { getSession } from "../utils";
 
 export const useStore = defineStore("store", {
   state() {
     return {
-      isLogin: false,
+      isLogin: getSession("login") || false,
     };
   },
   actions: {
-    toggleLogin: function () {
-      this.isLogin = !this.isLogin;
+    toggleLogin: function (bol: boolean) {
+      this.isLogin = bol;
     },
   },
 });

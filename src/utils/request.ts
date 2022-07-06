@@ -1,9 +1,11 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import qs from "qs";
+const PROXY_HTTP = import.meta.env.VITE_APP_PROXY_HTTP;
 
 const request = axios.create({
-  baseURL: import.meta.env.VITE_APP_PROXY_HTTP,
+  baseURL: PROXY_HTTP,
   timeout: 60 * 1000,
+  withCredentials: true,
 });
 
 request.interceptors.request.use(
@@ -17,8 +19,8 @@ request.interceptors.request.use(
 );
 
 request.interceptors.response.use(
-  (config: AxiosRequestConfig<any>) => {
-    return config;
+  (response: AxiosResponse) => {
+    return response;
   },
   (error) => {
     if (error && error.response.status) {

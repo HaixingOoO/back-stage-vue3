@@ -6,6 +6,11 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
   plugins: [
     vue(),
     AutoImport({
@@ -15,4 +20,18 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://1.116.64.64:5004/api2",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+      "/logined": {
+        target: "http://1.116.64.64:5004/api2",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/logined/, "/login"),
+      },
+    },
+  },
 });

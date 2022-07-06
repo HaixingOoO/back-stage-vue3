@@ -6,9 +6,15 @@
       :rules="rules"
       label-width="100px"
       class="w-[400px]"
+      @keyup.enter.native="submitForm(ruleFormRef)"
     >
       <el-form-item label="账号:" prop="username">
-        <el-input v-model="ruleForm.username" type="text" autocomplete="off" />
+        <el-input
+          v-model="ruleForm.username"
+          type="text"
+          autocomplete="off"
+          autofocus
+        />
       </el-form-item>
       <el-form-item label="密码:" prop="password">
         <el-input
@@ -23,6 +29,7 @@
           class="w-full"
           type="primary"
           @click="submitForm(ruleFormRef)"
+          :loading="loading"
           >login</el-button
         >
       </el-form-item>
@@ -31,7 +38,11 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
-import type { FormInstance } from "element-plus";
+import { ElMessage, FormInstance } from "element-plus";
+import { setSession } from "../../utils";
+import { useRouter } from "vue-router";
+import { useStore } from "../../store/useStore";
+import { login } from "../../api";
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -56,10 +67,15 @@ const validatePwd = (rule: any, value: any, callback: any) => {
   }
 };
 
+const router = useRouter();
+const store = useStore();
+
 const ruleForm = reactive({
   username: "",
   password: "",
 });
+
+const loading = ref(false);
 
 const rules = reactive({
   username: [{ validator: validateName, trigger: "blur" }],
@@ -68,13 +84,36 @@ const rules = reactive({
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate((valid) => {
-    if (valid) {
-      console.log(ruleForm);
-      console.log("submit!");
-    } else {
-      console.log("error submit!");
-      return false;
+  formEl.validate(async (valid) => {
+    try {
+      loading.value = true;
+      if (valid) {
+        const { data } = await login(ruleForm);
+        if (data.status === 200) {
+          setSession("token", data.token);
+          setSession("login", true);
+          store.toggleLogin(true);
+          router.push("/");
+          ElMessage({
+            message: "登录成功",
+            type: "success",
+          });
+        } else {
+          ElMessage({
+            message: "登录失败",
+            type: "error",
+          });
+        }
+      } else {
+        console.log("error submit!");
+      }
+    } catch (error) {
+      ElMessage({
+        message: "error:" + error,
+        type: "error",
+      });
+    } finally {
+      loading.value = false;
     }
   });
 };
