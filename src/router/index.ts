@@ -68,6 +68,14 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import("../views/about/About.vue"),
       },
+      {
+        path: "/echart",
+        name: "Echart",
+        meta: {
+          name: "数据统计",
+        },
+        component: () => import("../views/students/Echarts.vue"),
+      },
     ],
   },
   {

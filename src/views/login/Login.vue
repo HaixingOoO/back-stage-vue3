@@ -37,7 +37,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { ElMessage, FormInstance } from "element-plus";
 import { setSession } from "../../utils";
 import { useRouter } from "vue-router";
